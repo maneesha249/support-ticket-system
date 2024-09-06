@@ -34,17 +34,6 @@ const CreateTicket = () => {
           required
         ></textarea>
         
-        <label htmlFor="priority">Priority:</label>
-        <select
-          id="priority"
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-        
         <label htmlFor="category">Category:</label>
         <select
           id="category"

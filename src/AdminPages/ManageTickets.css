@@ -1,0 +1,42 @@
+/* src/pages/ManageTickets.css */
+.filters {
+    margin: 20px 0;
+  }
+  
+  .filters label {
+    font-weight: bold;
+  }
+  
+  .filters select {
+    margin-left: 10px;
+    padding: 5px;
+  }
+  
+  .ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .ticket-table th, .ticket-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .ticket-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .ticket-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .ticket-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .ticket-table button {
+    margin-right: 5px;
+  }
+  

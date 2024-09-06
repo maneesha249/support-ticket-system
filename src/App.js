@@ -1,21 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext';
-import Header from './components/Header';
-import Dashboard from './components/Dashboard';
-import CreateTicket from './pages/CreateTicket';
-import ManageTickets from './components/ManageTickets';
+import Layout from './components/Layout'; // Import Layout component
+import UserDashboard from './components/UserDashboard';
+import CreateTicket from './UserPages/CreateTicket';
+import AdminSignup from './AdminPages/AdminSignup';
+import AdminLogin from './AdminPages/AdminLogin';
+import ManageTickets from './AdminPages/ManageTickets';
+import AssignTickets from './AgentPages/AssignTickets'; // Uncommented import
+import AdminDashboard from './AdminPages/AdminDashboard';
 import UserProfile from './components/UserProfile';
 import SearchFilter from './components/SearchFilter';
 import Notifications from './components/Notifications';
-import AdminPanel from './components/AdminPanel';
 import HelpDocumentation from './components/HelpDocumentation';
 import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage';
+import UserSignup from './UserPages/UserSignup';
 import ProtectedRoute from './components/ProtectedRoute';
-import Settings from './pages/Settings';
-import AdminSignup from './pages/AdminSignup';
+import AgentSignup from './AgentPages/AgentSignup';
+import AgentLogin from './AgentPages/AgentLogin';
+import AgentManageTickets from './AgentPages/AgentManageTickets';
+import AgentDashboard from './AgentPages/AgentDashboard';
 import './styles/styles.css';
 
 const App = () => {
@@ -23,20 +28,30 @@ const App = () => {
     <AuthProvider>
       <SettingsProvider>
         <Router>
-          <Header />
           <Routes>
+            {/* Public Routes */}
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup/user" element={<SignUpPage />} />
-            <Route path="/signup/admin" element={<AdminSignup/>}/>
-            <Route path="/" element={<ProtectedRoute element={<Dashboard />} />} />
-            <Route path="/create-ticket" element={<ProtectedRoute element={<CreateTicket />} />} />
-            <Route path="/manage-tickets" element={<ProtectedRoute element={<ManageTickets />} />} />
-            <Route path="/profile" element={<ProtectedRoute element={<UserProfile />} />} />
-            <Route path="/search" element={<ProtectedRoute element={<SearchFilter />} />} />
-            <Route path="/notifications" element={<ProtectedRoute element={<Notifications />} />} />
-            <Route path="/admin" element={<ProtectedRoute element={<AdminPanel />} />} />
-            <Route path="/help" element={<HelpDocumentation />} />
-            <Route path="/settings" element={<ProtectedRoute element={<Settings />} />} />
+            <Route path="/user/signup" element={<UserSignup />} />
+            <Route path="/admin/signup" element={<AdminSignup />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/agent/signup" element={<AgentSignup />} />
+            <Route path="/agent/login" element={<AgentLogin />} />
+            
+            {/* Protected Routes with Layout */}
+            <Route path="/" element={<ProtectedRoute element={<Layout><UserDashboard /></Layout>} />} />
+            <Route path="/create-ticket" element={<ProtectedRoute element={<Layout><CreateTicket /></Layout>} />} />
+            <Route path="/admin/manage-tickets" element={<ProtectedRoute element={<Layout><ManageTickets /></Layout>} />} />
+            <Route path="/admin/assign-tickets" element={<ProtectedRoute element={<Layout><AssignTickets /></Layout>} />} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute element={<Layout><AdminDashboard/></Layout>} />} />
+            <Route path="/profile" element={<ProtectedRoute element={<Layout><UserProfile /></Layout>} />} />
+            <Route path="/search" element={<ProtectedRoute element={<Layout><SearchFilter /></Layout>} />} />
+            <Route path="/notifications" element={<ProtectedRoute element={<Layout><Notifications /></Layout>} />} />
+            <Route path="/help" element={<Layout><HelpDocumentation /></Layout>} />
+            
+            {/* Agent Routes */}
+            <Route path="/agent/dashboard" element={<ProtectedRoute element={<Layout><AgentDashboard /></Layout>} />} />
+            <Route path="/agent/manage-tickets" element={<ProtectedRoute element={<Layout><AgentManageTickets /></Layout>} />} />
+            <Route path="/agent/assign-tickets" element={<ProtectedRoute element={<Layout><AssignTickets /></Layout>} />} />
           </Routes>
         </Router>
       </SettingsProvider>

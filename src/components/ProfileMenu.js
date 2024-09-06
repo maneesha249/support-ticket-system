@@ -24,11 +24,11 @@ const ProfileMenu = () => {
       {isOpen && (
         <div className="profile-menu">
           <Link to="/profile" className="profile-menu-item">Profile</Link>
-          <Link to="/support-tickets" className="profile-menu-item">Support Tickets</Link>
+          {/* <Link to="/support-tickets" className="profile-menu-item">Support Tickets</Link> */}
           <Link to="/notifications" className="profile-menu-item">Notifications</Link>
           {/* <Link to="/messages" className="profile-menu-item">Messages</Link> */}
           <Link to="/help" className="profile-menu-item">Help/FAQ</Link>
-          <Link to="/settings" className="profile-menu-item">Settings</Link>
+          {/* <Link to="/settings" className="profile-menu-item">Settings</Link> */}
           <button onClick={logout} className="profile-menu-item">Logout</button>
         </div>
       )}

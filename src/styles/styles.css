@@ -85,3 +85,23 @@ body {
     --text-color: #fff;
   }
   
+  /* styles.css */
+.chart-section {
+  margin-top: 20px;
+}
+
+.stat-card {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.stat-card h3 {
+  margin: 0;
+}
+
+.stat-card p {
+  font-size: 1.5em;
+  margin: 0;
+}

@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import '../styles/Header.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
-import ProfileMenu from './ProfileMenu';
+import ProfileMenu from '../components/ProfileMenu';
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -29,7 +29,7 @@ const Header = () => {
           <nav className="nav">
             <Link to="/">Home</Link>
             <Link to="/create-ticket">Create Ticket</Link>
-            <Link to="/manage-tickets">Manage Tickets</Link>
+            {/* <Link to="/manage-tickets">Manage Tickets</Link> */}
             <Link to="/notifications" className="notifications-link">
               <FontAwesomeIcon icon={faBell} className="notifications-icon" />
             </Link>

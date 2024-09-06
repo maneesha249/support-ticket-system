@@ -1,0 +1,41 @@
+.agent-dashboard {
+    padding: 0px;
+  }
+  
+  .dashboard-stats {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .stat-box {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    width: 30%;
+    text-align: center;
+  }
+  
+  .stat-box h3 {
+    margin: 0;
+  }
+  
+  .stat-box p {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .recent-activity {
+    margin-top: 30px;
+  }
+  
+  .recent-activity table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .recent-activity th, .recent-activity td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  

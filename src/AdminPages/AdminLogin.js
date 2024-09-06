@@ -1,43 +1,33 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './SignUpPage.css';
+import '../pages/LoginPage.css'; 
 
-const AdminSignup = () => {
+const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail]=useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    // Mock sign-up logic
-    if (username && password &&email) {
-      // Successful sign-up
-      login({ username, profilePic: 'https://example.com/profile-pic.jpg' }); 
-      navigate('/manage-tickets'); 
+    // Mock authentication logic
+    if (username === 'admin' && password === 'admin') {
+      // Successful login
+      login({ username, profilePic: 'https://example.com/profile-pic.jpg' }); // Mock profile picture URL
+      navigate('/admin/manage-tickets');
     } else {
-      alert('Please fill in all fields');
+      alert('Invalid credentials');
     }
   };
 
   return (
     <div className="page-container">
-        <h1>Admin Signup</h1>
+      <h1>Welcome to Customer Support</h1>
       <div className="form-container">
-        <h2>Sign Up</h2>
-        <form onSubmit={handleSignUp}>
+        <h2>Login</h2>
+        <form onSubmit={handleLogin}>
           <label>
-            Email
-          <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            </label>
-            <label>
             Username:
             <input
               type="text"
@@ -55,12 +45,12 @@ const AdminSignup = () => {
               required
             />
           </label>
-          <button type="submit">Sign Up</button>
+          <button type="submit">Login</button>
         </form>
-        <p>Already have an account? <Link to="/login">Login</Link></p>
+        <p>Don't have an account? <Link to="/signup/admin">Sign Up</Link></p>
       </div>
     </div>
   );
 };
 
-export default AdminSignup;
+export default LoginPage;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './LoginPage.css'; 
+import '../pages/LoginPage.css'; 
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -12,10 +12,10 @@ const LoginPage = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     // Mock authentication logic
-    if (username === 'user' && password === 'password') {
+    if (username === 'agent' && password === 'agent') {
       // Successful login
       login({ username, profilePic: 'https://example.com/profile-pic.jpg' }); // Mock profile picture URL
-      navigate('/create-ticket'); // Redirect to Create Ticket page
+      navigate('/agent/dashboard');
     } else {
       alert('Invalid credentials');
     }
@@ -47,7 +47,7 @@ const LoginPage = () => {
           </label>
           <button type="submit">Login</button>
         </form>
-        <p>Don't have an account? <Link to="/signup/user">Sign Up</Link></p>
+        <p>Don't have an account? <Link to="/agent/signup">Sign Up</Link></p>
       </div>
     </div>
   );

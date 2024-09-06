@@ -1,33 +1,43 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './LoginPage.css'; 
+import '../UserPages/UserSignup.css';
 
-const LoginPage = () => {
+const AdminSignup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail]=useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSignUp = (e) => {
     e.preventDefault();
-    // Mock authentication logic
-    if (username === 'user' && password === 'password') {
-      // Successful login
-      login({ username, profilePic: 'https://example.com/profile-pic.jpg' }); // Mock profile picture URL
-      navigate('/create-ticket'); // Redirect to Create Ticket page
+    // Mock sign-up logic
+    if (username && password &&email) {
+      // Successful sign-up
+      login({ username, profilePic: 'https://example.com/profile-pic.jpg' }); 
+      navigate('/admin/manage-tickets'); 
     } else {
-      alert('Invalid credentials');
+      alert('Please fill in all fields');
     }
   };
 
   return (
     <div className="page-container">
-      <h1>Welcome to Customer Support</h1>
+        <h1>Admin Signup</h1>
       <div className="form-container">
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSignUp}>
           <label>
+            Email
+          <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            </label>
+            <label>
             Username:
             <input
               type="text"
@@ -45,12 +55,12 @@ const LoginPage = () => {
               required
             />
           </label>
-          <button type="submit">Login</button>
+          <button type="submit">Sign Up</button>
         </form>
-        <p>Don't have an account? <Link to="/signup/user">Sign Up</Link></p>
+        <p>Already have an account? <Link to="/admin/login">Login</Link></p>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default AdminSignup;
