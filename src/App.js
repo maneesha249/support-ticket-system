@@ -22,6 +22,9 @@ import AgentLogin from './AgentPages/AgentLogin';
 import AgentManageTickets from './AgentPages/AgentManageTickets';
 import AgentDashboard from './AgentPages/AgentDashboard';
 import './styles/styles.css';
+import AgentRegister from './AgentPages/AgentRegister';
+import TicketDetails from './AgentPages/TicketDetails';
+import TicketDisplay from './AdminPages/TicketsDisplay';
 
 const App = () => {
   return (
@@ -29,13 +32,14 @@ const App = () => {
       <SettingsProvider>
         <Router>
           <Routes>
-            {/* Public Routes */}
+            
             <Route path="/login" element={<LoginPage />} />
             <Route path="/user/signup" element={<UserSignup />} />
             <Route path="/admin/signup" element={<AdminSignup />} />
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/agent/signup" element={<AgentSignup />} />
+            <Route path="/signup/agent" element={<AgentSignup />} />
             <Route path="/agent/login" element={<AgentLogin />} />
+            <Route path="/admin/tickets/details" element={<TicketDisplay />} />
             
             {/* Protected Routes with Layout */}
             <Route path="/" element={<ProtectedRoute element={<Layout><UserDashboard /></Layout>} />} />
@@ -49,8 +53,13 @@ const App = () => {
             <Route path="/help" element={<Layout><HelpDocumentation /></Layout>} />
             
             {/* Agent Routes */}
-            <Route path="/agent/dashboard" element={<ProtectedRoute element={<Layout><AgentDashboard /></Layout>} />} />
-            <Route path="/agent/manage-tickets" element={<ProtectedRoute element={<Layout><AgentManageTickets /></Layout>} />} />
+            <Route path="/agent/dashboard" element={<Layout><AgentDashboard /></Layout>} />
+            <Route path="/agent/register" element={<Layout><AgentRegister /></Layout>} />
+            <Route path="/tickets/title/:title" element={<TicketDetails />} />
+
+            <Route path="/agent/manage-tickets" element={<Layout><AgentManageTickets /></Layout>} />
+            
+
             <Route path="/agent/assign-tickets" element={<ProtectedRoute element={<Layout><AssignTickets /></Layout>} />} />
           </Routes>
         </Router>

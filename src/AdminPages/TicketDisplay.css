@@ -1,0 +1,23 @@
+.page-container {
+    padding: 30px;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  
+  .tickets-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .tickets-list li {
+    padding: 10px;
+    background-color: #f4f4f4;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tickets-list li strong {
+    font-weight: bold;
+  }
+  

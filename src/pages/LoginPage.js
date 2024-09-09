@@ -1,23 +1,59 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import './LoginPage.css'; 
+import { useNavigate, Link} from 'react-router-dom';
+import '../pages/LoginPage.css';
+import axios from 'axios'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Mock authentication logic
-    if (username === 'user' && password === 'password') {
-      // Successful login
-      login({ username, profilePic: 'https://example.com/profile-pic.jpg' }); // Mock profile picture URL
-      navigate('/create-ticket'); // Redirect to Create Ticket page
-    } else {
-      alert('Invalid credentials');
+
+    try {
+     
+      const formdata = new FormData()
+      formdata.append('username', username)
+      formdata.append('password', password)
+      const loginResponse = await axios.post('http://localhost:7000/login', formdata, {
+        withCredentials: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
+      });
+      console.log(loginResponse)
+    
+
+      if (loginResponse.status === 200) {
+       
+        const userDetailsResponse = await axios.get('http://localhost:7000/checkLoggedInUser', {
+          withCredentials: true 
+        });
+        console.log(userDetailsResponse)
+
+        localStorage.setItem('id', JSON.stringify(userDetailsResponse.data.id));
+        console.log(localStorage.getItem('id'))
+       
+        localStorage.setItem('username',JSON.stringify(userDetailsResponse.data.username))
+        console.log(userDetailsResponse.data.username);
+        if (userDetailsResponse.status === 200) {
+          const user = userDetailsResponse.data;
+          
+          if (user.role === 'ROLE_AGENT') {
+            navigate('/agent/manage-tickets'); 
+          } else {
+            alert('Invalid role');
+          }
+        } else {
+          alert('Failed to fetch user details');
+        }
+      } else {
+        alert('Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred during login. Please try again.');
     }
   };
 

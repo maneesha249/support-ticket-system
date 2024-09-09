@@ -1,23 +1,61 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import '../pages/LoginPage.css'; 
+import '../pages/LoginPage.css';
+import axios from 'axios';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Mock authentication logic
-    if (username === 'admin' && password === 'admin') {
-      // Successful login
-      login({ username, profilePic: 'https://example.com/profile-pic.jpg' }); // Mock profile picture URL
-      navigate('/admin/manage-tickets');
-    } else {
-      alert('Invalid credentials');
+
+    try {
+      // Authenticate the user
+      const formdata = new FormData();
+      formdata.append('username', username);
+      formdata.append('password', password);
+      const loginResponse = await axios.post('http://localhost:7000/login', formdata, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+    //  console.log(loginResponse);
+
+      if (loginResponse.status === 200) {
+        // Fetch logged-in user details after successful login
+        const userDetailsResponse = await axios.get('http://localhost:7000/checkLoggedInUser', {
+          withCredentials: true, headers: {
+            'Content-Type': 'application/json',
+          },
+          
+        });
+       // console.log(userDetailsResponse)
+        if (userDetailsResponse.status === 200) {
+          const user = userDetailsResponse.data;
+          console.log(user.username);
+          
+
+         
+          localStorage.setItem('username', JSON.stringify(user.username));
+          localStorage.setItem('id',JSON.stringify(user.id));
+
+          if (user.role === 'ROLE_ADMIN') {
+            navigate('/admin/tickets/details'); // Redirect to Create Ticket page
+          } else {
+            alert('Invalid role');
+          }
+        } else {
+          alert('Failed to fetch agent details');
+        }
+      } else {
+        alert('Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred during login. Please try again.');
     }
   };
 
@@ -47,7 +85,7 @@ const LoginPage = () => {
           </label>
           <button type="submit">Login</button>
         </form>
-        <p>Don't have an account? <Link to="/signup/admin">Sign Up</Link></p>
+        <p>Don't have an account? <Link to="/signup/user">Sign Up</Link></p>
       </div>
     </div>
   );

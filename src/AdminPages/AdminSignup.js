@@ -1,22 +1,44 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import '../UserPages/UserSignup.css';
 
-const AdminSignup = () => {
+
+const SignUpPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail]=useState('');
-  const { login } = useAuth();
+  const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // Mock sign-up logic
-    if (username && password &&email) {
-      // Successful sign-up
-      login({ username, profilePic: 'https://example.com/profile-pic.jpg' }); 
-      navigate('/admin/manage-tickets'); 
+
+    if (username && password && email) {
+      // Prepare the user data to send in the request body
+      const userData = {
+        username,
+        password,
+        email,
+      };
+
+      try {
+        // Send POST request to Spring Boot backend
+        const response = await fetch('http://localhost:7000/signup/admin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData), // Send the user data
+        });
+
+        if (response.ok) {
+          // On successful sign-up, redirect to Create Ticket page
+          navigate('/admin/login');
+        } else {
+          alert('Error: Unable to sign up');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again.');
+      }
     } else {
       alert('Please fill in all fields');
     }
@@ -24,20 +46,20 @@ const AdminSignup = () => {
 
   return (
     <div className="page-container">
-        <h1>Admin Signup</h1>
+      <h1>Welcome to Customer Support</h1>
       <div className="form-container">
         <h2>Sign Up</h2>
         <form onSubmit={handleSignUp}>
           <label>
-            Email
-          <input
+            Email:
+            <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            </label>
-            <label>
+          </label>
+          <label>
             Username:
             <input
               type="text"
@@ -57,10 +79,10 @@ const AdminSignup = () => {
           </label>
           <button type="submit">Sign Up</button>
         </form>
-        <p>Already have an account? <Link to="/admin/login">Login</Link></p>
+        <p>Already have an account? <Link to="/login">Login</Link></p>
       </div>
     </div>
   );
 };
 
-export default AdminSignup;
+export default SignUpPage;
