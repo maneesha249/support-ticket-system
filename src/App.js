@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext';
@@ -16,7 +16,13 @@ import SignUpPage from './pages/SignUpPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import Settings from './pages/Settings';
 import AdminSignup from './pages/AdminSignup';
-import './styles/styles.css';
+import ButtonsPage from './pages/ButtonsPage'
+import DeleteTicketPage from './pages/DeleteTicketPage';
+import TicketStatus from './pages/TicketStatus'
+import EditTicket from './pages/EditTicket'
+
+
+import SuccessPage from './pages/SuccessPage';
 
 const App = () => {
   return (
@@ -25,18 +31,25 @@ const App = () => {
         <Router>
           <Header />
           <Routes>
+         
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup/user" element={<SignUpPage />} />
-            <Route path="/signup/admin" element={<AdminSignup/>}/>
-            <Route path="/" element={<ProtectedRoute element={<Dashboard />} />} />
-            <Route path="/create-ticket" element={<ProtectedRoute element={<CreateTicket />} />} />
+            <Route path="/signup/admin" element={<AdminSignup />} />
+            <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+            <Route path="/buttons" element={<ButtonsPage />} />
+            <Route path="/create-ticket" element={<CreateTicket/>} />
+            <Route path="/delete-ticket" element={<DeleteTicketPage/>} />
+            <Route path="/view-ticket-status" element={ <TicketStatus/>} />
+
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/edit-ticket" element={<EditTicket />} />
             <Route path="/manage-tickets" element={<ProtectedRoute element={<ManageTickets />} />} />
             <Route path="/profile" element={<ProtectedRoute element={<UserProfile />} />} />
             <Route path="/search" element={<ProtectedRoute element={<SearchFilter />} />} />
             <Route path="/notifications" element={<ProtectedRoute element={<Notifications />} />} />
             <Route path="/admin" element={<ProtectedRoute element={<AdminPanel />} />} />
-            <Route path="/help" element={<HelpDocumentation />} />
             <Route path="/settings" element={<ProtectedRoute element={<Settings />} />} />
+            <Route path="/help" element={<HelpDocumentation />} />
           </Routes>
         </Router>
       </SettingsProvider>

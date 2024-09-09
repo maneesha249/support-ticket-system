@@ -1,0 +1,104 @@
+.page-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align items horizontally */
+    padding: 30px;
+    height: 100vh;
+    box-sizing: border-box; /* Ensure padding is included in height calculation */
+}
+.h1-tag{
+  
+  font-size: 30px;
+
+}
+ 
+/* Welcome text styling */
+.welcome-message {
+    width: 100%; /* Full width of the container */
+    text-align: center; /* Center text horizontally */
+    margin-bottom: 20px; /* Space below the welcome message */
+}
+ 
+.welcome-message h2 {
+    font-size: 32px;
+    color: #8a1515;
+    margin: 0; /* Remove any margin */
+    padding: 15px; /* Add padding for spacing */
+}
+ 
+/* Left section for buttons */
+.buttons-container {
+    width: 100%; /* Full width */
+    text-align: center; /* Center align text */
+    margin-bottom: 10px; /* Space below buttons */
+}
+ 
+/* Button styling */
+.buttons-container button {
+    margin-top: 0;
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    color: white; /* White text */
+    padding: 15px 25px;
+    margin: 12px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 60%; /* Button width */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Button shadow */
+}
+ 
+/* Hover effect for buttons */
+.buttons-container button:hover {
+    background-color: #45a049; /* Darker green */
+    transform: translateY(-2px); /* Lift effect */
+}
+ 
+/* Focus effect */
+.buttons-container button:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 128, 0, 0.5); /* Green shadow on focus */
+}
+ 
+/* Disabled button styling */
+.buttons-container button:disabled {
+    background-color: #d3d3d3; /* Gray background for disabled button */
+    color: #808080; /* Gray text */
+    cursor: not-allowed;
+}
+ 
+/* Right section for FAQ */
+.faq-container {
+    text-align: center;
+    width: 50%; /* Adjust width as needed */
+    background-color: #f9f9f9; /* Light background for FAQ section */
+    padding: 30px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for the FAQ container */
+}
+ 
+.faq-container h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+ 
+/* FAQ list styling */
+.faq-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+ 
+.faq-container li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+ 
+/* Hover effect for FAQ items */
+.faq-container li:hover {
+    color: #4CAF50; /* Change color on hover */
+    cursor: pointer;
+}
